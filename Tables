@@ -1,0 +1,80 @@
+CREATE TABLE employee (
+    eid INT,
+    fname VARCHAR(50),
+    lname VARCHAR(50),
+    age INT,
+    salary INT NULL,
+    dept VARCHAR(20),
+    doj DATE
+);
+ INSERT INTO employee (eid, fname, lname, age, salary, dept, doj) VALUES
+(1, 'rajeev', 'sukla', 23, 12000, '.net', '2011-10-23'),
+(2, 'sowmya', 'kumari', 23, 19000, 'db', '2010-11-13'),
+(3, 'kishore', 'kumar', 27, 36000, 'android', '2011-10-16'),
+(4, 'abimanyu', 'biswal', 22, NULL, 'android', '2010-02-20'),
+(5, 'soni', 'kumar', 24, 21800, '.net', '2009-06-21'),
+(6, 'anu', '_singh', 22, 12000, 'db', '2010-10-23'),
+(7, '_dinesh', 'moh%anty', 23, 15000, '.net', '2009-08-26'),
+(8, 'nishala', '_kumari', 22, 18000, 'db', '2008-07-19'),
+(1, 'rajeev', 'sukla', 23, 12000, '.net', '2011-10-23');
+
+select * from employee order by salary desc  limit 5;
+select * from employee   order by salary desc limit 4  ;
+select * from employee order by salary asc  limit 5;
+select salary  from employee where age >= 23;
+select salary from employee where  salary between '22'and '24';
+select age from employee where  age between '22'and '24';
+SELECT fname,lname,age, avg(salary) from employee group by fname,lname,age;
+SELECT dept from employee group by dept;
+SELECT fname,lname,min(salary) from employee group by  fname,lname;
+SELECT fname,lname,dept, avg(salary) from employee group by fname,lname,dept;
+SELECT avg(salary) from employee where dept='db';
+SELECT * from employee where salary between (SELECT max(salary) from employee where dept='.net') and
+(SELECT min(salary) from employee where dept='db');
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE patient (
+    pid INT,
+    fname VARCHAR(50),
+    lname VARCHAR(50),
+    age INT,
+    bg VARCHAR(10)
+);
+INSERT INTO patient (pid, fname, lname, age, bg) VALUES
+(1, 'madhava', 'reddy', 45, 'o+ve'),
+(2, 'abhinav', 'bandra', 45, 'o-ve'),
+(4, 'hari', 'kiran', 60, 'b-ve'),
+(3, 'madhava', 'kiran', 52, 'o+ve'),
+(5, 'veena', 'kumari', 42, NULL),
+(6, 'k_iran', 'kumar', 39, 'b-ve'),
+(2, 'abhinav', 'bandra', 45, 'o-ve'),
+(7, 'mahes%h', 'nambootri', 36, 'b+ve'),
+(8, 'rahul', 'kumar', 46, 'b-ve'),
+(9, 'bharat', 'kumar', 56, 'b-ve');
+select * from  patient;
+SELECT CONCAT(fname, lname, ' bg is ', bg, ' and he/she is from india') FROM patient;
+select CONCAT(fname,lname,'age is ',age) FROM patient;
+select CONCAT(fname,lname,'bg is ',bg) FROM patient;
+select * from patient order by age desc  limit 7;
+SELECT age FROM patient group by age;
+SELECT distinct age FROM patient where age;
+SELECT age,bg from patient group by age,bg;
+SELECT age,bg, avg(fname) from patient group by age,bg;
+SELECT count(age) as result from patient;
+SELECT count(bg) as result from patient;
+SELECT count(*) as 'matching rows' from patient where age>=45 and age<80;
+SELECT bg,count(*) as 'count' from patient group by bg;
+SELECT max(age) as 'max age',bg from patient group by bg;
+SELECT lname as 'min age' from patient group by bg,lname;
+SELECT fname,lname,min(age) from patient group by bg,fname, lname;
